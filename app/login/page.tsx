@@ -1,6 +1,6 @@
 import { ArrowRight, LockKeyhole, Mail, UserRound, Zap } from "lucide-react";
 import { isSupabaseConfigured } from "@/lib/supabase/config";
-import { signIn, signUp } from "./actions";
+import { requestPasswordReset, signIn, signUp } from "./actions";
 
 type LoginPageProps = {
   searchParams: Promise<{ error?: string; message?: string }>;
@@ -40,6 +40,8 @@ export default async function LoginPage({ searchParams }: LoginPageProps) {
               <label><span><LockKeyhole size={16} /> Mật khẩu</span><input name="password" type="password" minLength={6} required placeholder="Tối thiểu 6 ký tự" /></label>
               <button disabled={!configured}>Đăng nhập <ArrowRight size={18} /></button>
             </form>
+
+            <details className="forgot-password"><summary>Quên mật khẩu?</summary><form action={requestPasswordReset}><input name="email" type="email" required placeholder="Email tài khoản" /><button disabled={!configured}>Gửi liên kết đặt lại</button></form></details>
 
             <div className="auth-divider"><span>HOẶC TẠO MỚI</span></div>
 

@@ -42,3 +42,15 @@ export async function signUp(formData: FormData) {
   if (error) redirect(loginUrl(error.message));
   redirect(loginUrl("Kiểm tra email để xác nhận tài khoản ClubMate.", "message"));
 }
+
+export async function requestPasswordReset(formData: FormData) {
+  if (!isSupabaseConfigured()) redirect(loginUrl("Supabase chưa được cấu hình."));
+  const email = String(formData.get("email") ?? "").trim();
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000";
+  const supabase = await createClient();
+  const { error } = await supabase.auth.resetPasswordForEmail(email, {
+    redirectTo: `${siteUrl}/auth/callback?next=/reset-password`,
+  });
+  if (error) redirect(loginUrl(error.message));
+  redirect(loginUrl("Nếu email tồn tại, liên kết đặt lại mật khẩu đã được gửi.", "message"));
+}
