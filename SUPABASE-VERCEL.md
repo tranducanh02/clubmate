@@ -1,6 +1,13 @@
 # Kết nối ClubMate với Supabase và Vercel
 
-Phần mã, migration và CLI đã có sẵn. Các bước còn lại cần quyền trên tài khoản của chủ dự án.
+## Trạng thái hiện tại
+
+- Production: https://clubmate-gold.vercel.app
+- Vercel project: `ducanhs-projects-6f11c09a/clubmate`
+- Supabase project: `clubmate` (`owoizxbpyymyxaaafqnn`)
+- Database migration, RLS, biến môi trường và Auth redirect URL đã được áp dụng.
+
+Các bước dưới đây là quy trình để kết nối lại hoặc triển khai sang một tài khoản khác.
 
 ## 1. Tạo và liên kết Supabase
 
