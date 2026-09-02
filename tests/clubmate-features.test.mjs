@@ -28,3 +28,9 @@ test("ships invitation, ghost claim, safe RSVP and atomic finalization RPCs", as
   assert.match(sql, /claim_code_expires_at/);
   assert.match(sql, /insert into storage\.buckets/);
 });
+
+test("allows INSERT RETURNING for the team owner before membership trigger completes", async () => {
+  const sql = await readFile(new URL("../supabase/migrations/202609030003_fix_team_insert_returning_rls.sql", import.meta.url), "utf8");
+  assert.match(sql, /owner_id\s*=\s*\(select auth\.uid\(\)\)/);
+  assert.match(sql, /or public\.has_team_membership\(id\)/);
+});

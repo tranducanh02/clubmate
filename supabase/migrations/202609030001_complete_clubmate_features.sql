@@ -71,7 +71,7 @@ create policy profiles_read_self_or_teammate on public.profiles for select to au
 
 drop policy if exists teams_read_members on public.teams;
 create policy teams_read_members on public.teams for select to authenticated
-  using (public.has_team_membership(id));
+  using (owner_id = (select auth.uid()) or public.has_team_membership(id));
 
 create policy team_members_read_self on public.team_members for select to authenticated
   using (user_id = (select auth.uid()));
