@@ -1,0 +1,1 @@
+-- Add development-only seed data here after creating a local test user.
